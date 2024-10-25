@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Agregar Servicio</title>
+
+    <script type="module" src="lib/js/submitForm.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
+
+</head>
+
+<body>
+
+    <form onsubmit="submitForm('/srv/servicio-agrega.php', event)
+    .then(modelo => location.href = 'index.html')
+    .catch(muestraError)">
+
+        <h1>Agregar</h1>
+
+        <p><a href="index.html">Cancelar</a></p>
+
+        <p>
+            <label>
+                Nombre del servicio *
+                <input type="text" name="nombre_servicio" id="nombre_servicio">
+            </label>
+        </p>
+        <p>
+            <label>
+                Descripción *
+                <textarea type="text" name="descripcion" id="descripcion"></textarea>
+            </label>
+        </p>
+        <p>
+            <label>
+                Precio *
+                <input type="number" name="precio">
+            </label>
+        </p>
+        <p>
+            <label>
+                ¿Necesita un anticipo el servicio? ¿Cuanto? (%) *
+                <input type="number" name="anticipo">
+            </label>
+        </p>
+     
+
+
+        <p>* Obligatorio</p>
+
+        <p><button type="submit">Agregar</button></p>
+
+    </form>
+
+</body>
+
+</html>

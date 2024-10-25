@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Modificar</title>
+
+    <script type="module" src="lib/js/consumeJson.js"></script>
+    <script type="module" src="lib/js/submitForm.js"></script>
+    <script type="module" src="lib/js/muestraObjeto.js"></script>
+    <script type="module" src="lib/js/muestraError.js"></script>
+
+    <script>
+        // Obtiene los parámetros de la página.
+        const params = new URL(location.href).searchParams
+    </script>
+
+</head>
+
+<body onload="if (params.size > 0) {
+   consumeJson('srv/servicio.php?' + params)
+    .then(respuesta => muestraObjeto(forma, respuesta.body))
+    .catch(muestraError)
+  }">
+
+    <form id="forma" onsubmit="submitForm('srv/servicio-modifica.php', event)
+    .then(respuesta => location.href = 'index.html')
+    .catch(muestraError)">
+
+        <h1>Modificar</h1>
+
+        <p><a href="index.html">Cancelar</a></p>
+
+        <input name="id" type="hidden">
+
+        <p>
+            <label>
+                Nombre *
+                <input name="nombre_servicio" value="Cargando…">
+            </label>
+        </p>
+        <p>
+            <label>
+                Descripción *
+                <textarea name="descripcion" value="Cargando…"></textarea>
+            </label>
+        </p>
+        <p>
+            <label>
+                Precio *
+                <input type="number" name="precio" value="Cargando…">
+            </label>
+        </p>
+        <p>
+            <label>
+                ¿Necesita un anticipo el servicio? ¿Cuanto? (%) *
+                <input type="number" name="anticipo" value="Cargando…">
+            </label>
+        </p>
+        
+        <p>* Obligatorio</p>
+
+        <p>
+
+            <button type="submit">Guardar</button>
+
+            <button type="button" onclick="
+     if (params.size > 0 && confirm('Confirma la eliminación')) {
+      consumeJson('srv/servicio-elimina.php?' + params)
+       .then(() => location.href = 'index.html')
+       .catch(muestraError)
+     }">
+                Eliminar
+            </button>
+
+        </p>
+
+    </form>
+
+</body>
+
+</html>
